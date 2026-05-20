@@ -217,9 +217,9 @@ graph TD
 
 ### Pick ≥ 2:
 
-- [ ] **Weekly public devlog** — post progress every Sunday on: __________ (Twitter/X, Mastodon, Bluesky, r/roguelikedev, personal blog)
+- [x] **Weekly public devlog** — post progress every Sunday on: personal blog (Twitter/X, Mastodon, Bluesky, r/roguelikedev, personal blog)
 - [ ] **Accountability partner** — one human, name them: __________ — texts you every Sunday asking what shipped this week
-- [ ] **GitHub commit streak** — minimum 1 commit per active day, track via GitHub's contribution graph
+- [x] **GitHub commit streak** — minimum 1 commit per active day, track via GitHub's contribution graph
 - [ ] **Monetary stake** — beeminder.com or stickK.com, with $__ at risk for missed weekly goals
 - [ ] **Apple developer / itch.io payment** — $__ already paid as sunk cost
 - [ ] **Public deadline** — announce ship date: __________ to: __________
