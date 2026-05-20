@@ -92,6 +92,9 @@ A grid-based tactical roguelike deckbuilder where positioning and a per-turn act
 - Stealth/cover system
 - Multiple acts/biomes
 - Free-exploration dungeon mode
+- trinket items that give passive buffs
+- DOT effects
+- Weapons and armor
 
 ---
 
@@ -226,9 +229,9 @@ graph TD
 
 ### My implementation intention (Gollwitzer-style if/then plan):
 
-- **If** it is __________ [day] at __________ [time], **then** I will be at __________ [place] with Godot open working on the next checkbox.
-- **If** I miss a session, **then** the next session is __________ [time/day] — no negotiating.
-- **If** I get stuck for more than 2 hours on a problem, **then** I ask in __________ [Godot Discord, Stack Overflow, Reddit, etc.] before grinding solo.
+- **If** it is after Dinner or A day off, **then** I will be at home or at the library with Godot open working on the next checkbox until at most 10 p.m.
+- **If** I miss a session, **then** the next session is during my lunch — no negotiating.
+- **If** I get stuck for more than 2 hours on a problem, **then** I ask in Godot Discord, Stack Overflow and Claude before grinding solo.
 
 ---
 
@@ -236,4 +239,4 @@ graph TD
 
 > Write here when you make a design change. Date it. Revisit before you let scope creep further.
 
-- *YYYY-MM-DD:* example — "decided to cut Cleave from starter deck because it was too strong"
+- 2026-05-20: parked ideas for DOTS, items, and weapons for v2. Reminder: our MVP is of greater scope than most portfolio projects. Finishing > expanding.
