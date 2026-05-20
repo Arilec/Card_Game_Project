@@ -143,9 +143,9 @@ graph TD
 > Don't dwell on weeks. Move the work forward — these are guideposts, not deadlines. If you're a week ahead, great. A week behind, cut scope.
 
 ### Week 1 — Foundation
-- [ ] Godot 4 installed, hello world running
-- [ ] Public GitHub repo created and pushed
-- [ ] 6×6 grid renders on screen
+- [x] Godot 4 installed, hello world running
+- [x] Public GitHub repo created and pushed
+- [x] 6×6 grid renders on screen
 - [ ] Player sprite placed on a tile (placeholder art is fine)
 
 ### Week 2 — Movement & Setup
