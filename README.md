@@ -30,6 +30,7 @@ A grid-based tactical roguelike deckbuilder where positioning and a per-turn act
 - **Player HP:** 50, persists between fights, restored only at rest sites
 - **Block:** Resets at start of player turn (Slay the Spire-style)
 - **Hand:** Draw 5/turn, discard remaining at turn end, reshuffle when deck empty
+- **Movement:** Standalone action. Click character to enter movement mode, click a destination tile to walk there. **1 AP per tile traversed.** Path auto-routes around obstacles. Cards that grant movement are independent of this system.
 
 ## 5. Starter Deck (10 cards — Fighter)
 
