@@ -150,7 +150,7 @@ graph TD
 - [x] Godot 4 installed, hello world running
 - [x] Public GitHub repo created and pushed
 - [x] 6×6 grid renders on screen
-- [ ] Player sprite placed on a tile (placeholder art is fine)
+- [x] Player sprite placed on a tile (placeholder art is fine)
 
 ### Week 2 — Movement & Setup
 - [ ] Click-to-move working (player moves to clicked tile)
