@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Card Game Project"
-run/main_scene="uid://p3wpg7wbx6kt"
+run/main_scene="uid://cuaxi8s32q4qj"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Grid="*uid://d5qp72y2hbvg"
 
 [editor]
 
