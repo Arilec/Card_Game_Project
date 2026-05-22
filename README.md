@@ -154,7 +154,7 @@ graph TD
 
 ### Week 2 — Movement & Setup
 - [ ] Click-to-move working (player moves to clicked tile)
-- [ ] Camera framed correctly
+- [x] Camera framed correctly
 - [ ] Card data structure defined (just a script/resource, no UI yet)
 
 ### Week 3 — Cards & AP
