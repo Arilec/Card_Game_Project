@@ -1,7 +1,20 @@
 [gd_scene format=3 uid="uid://cnynxeldao3nj"]
 
-[ext_resource type="Script" uid="uid://bhur75wpdm6mo" path="res://Scripts/player.gd" id="1_kyqiw"]
 [ext_resource type="Texture2D" uid="uid://cpniexc25syp3" path="res://Assets/brackeys_platformer_assets/sprites/knight.png" id="1_rpqav"]
+
+[sub_resource type="GDScript" id="GDScript_rpqav"]
+script/source = "extends CharacterBody2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kyqiw"]
 atlas = ExtResource("1_rpqav")
@@ -43,10 +56,11 @@ animations = [{
 size = Vector2(16, 16)
 
 [node name="Player" type="CharacterBody2D" unique_id=519002845]
-script = ExtResource("1_kyqiw")
+script = SubResource("GDScript_rpqav")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=398984952]
 position = Vector2(0, -2)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_nn08x")
 animation = &"Idle"
 autoplay = "Idle"

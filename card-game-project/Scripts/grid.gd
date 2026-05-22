@@ -3,7 +3,7 @@
 extends Node
 
 const SIZE: Vector2i = Vector2i(6, 6)
-const CELL_SIZE: Vector2 = Vector2(16, 16)
+const CELL_SIZE: Vector2 = Vector2(32, 32)
 
 #Converts Pixel Coords to Vector grid locations
 func world_to_grid(world_pos: Vector2) -> Vector2i:
