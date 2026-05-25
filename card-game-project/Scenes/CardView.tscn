@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://syhk4uuj1mfs"]
+
+[ext_resource type="Texture2D" uid="uid://dctymqv41w1fj" path="res://icon.svg" id="1_md31b"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0gdap"]
+font_size = 12
+
+[node name="CardView" type="Node2D" unique_id=560774916]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=354624149]
+offset_right = 160.0
+offset_bottom = 224.0
+color = Color(0.47788018, 0.47788012, 0.47788012, 1)
+
+[node name="Name" type="Label" parent="ColorRect" unique_id=545335638]
+layout_mode = 0
+offset_right = 129.0
+offset_bottom = 37.0
+text = "Card_name"
+
+[node name="Cost" type="Label" parent="ColorRect" unique_id=164090583]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 1.0
+offset_right = 168.0
+offset_bottom = 33.0
+text = "X"
+horizontal_alignment = 1
+
+[node name="Typeline" type="Label" parent="ColorRect" unique_id=1199938864]
+layout_mode = 0
+offset_top = 127.0
+offset_right = 155.0
+offset_bottom = 150.0
+text = "card_type(s)"
+label_settings = SubResource("LabelSettings_0gdap")
+
+[node name="Description" type="RichTextLabel" parent="ColorRect" unique_id=761143584]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 144.0
+offset_right = 152.0
+offset_bottom = 202.0
+text = "This is a card. It has Abilities. "
+fit_content = true
+
+[node name="Graphics" type="TextureRect" parent="ColorRect" unique_id=2039823574]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 22.0
+offset_right = 155.0
+offset_bottom = 126.0
+texture = ExtResource("1_md31b")
+expand_mode = 1

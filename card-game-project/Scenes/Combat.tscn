@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://bv4ydkxq0reqr" path="res://Scripts/combat.gd" id="1_5y3t8"]
 [ext_resource type="PackedScene" uid="uid://cnynxeldao3nj" path="res://Scenes/Player.tscn" id="3_jr68y"]
 
-[node name="Combat" type="Node2D" unique_id=1165033110 node_paths=PackedStringArray("pathfinder")]
+[node name="Combat" type="Node2D" unique_id=1165033110 node_paths=PackedStringArray("path_line")]
 script = ExtResource("1_5y3t8")
-pathfinder = NodePath("Line2D")
+path_line = NodePath("Line2D")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=177422705]
 position = Vector2(96, 96)
