@@ -1,13 +1,18 @@
 [gd_scene format=3 uid="uid://syhk4uuj1mfs"]
 
+[ext_resource type="Script" uid="uid://bpipkchsq7kxm" path="res://Scripts/card_view.gd" id="1_0gdap"]
 [ext_resource type="Texture2D" uid="uid://dctymqv41w1fj" path="res://icon.svg" id="1_md31b"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0gdap"]
 font_size = 12
 
-[node name="CardView" type="Node2D" unique_id=560774916]
+[node name="CardView" type="Control" unique_id=1549294561]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_0gdap")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=354624149]
+layout_mode = 0
 offset_right = 160.0
 offset_bottom = 224.0
 color = Color(0.47788018, 0.47788012, 0.47788012, 1)

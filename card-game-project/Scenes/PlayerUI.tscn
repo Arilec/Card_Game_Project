@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://xpp318gwbxla"]
+
+[ext_resource type="PackedScene" uid="uid://b4edc27ys72cf" path="res://Scenes/PlayerHP.tscn" id="1_8tgur"]
+[ext_resource type="Script" uid="uid://djg7c0yyvn8gl" path="res://Scripts/player_controller.gd" id="1_hfrq2"]
+
+[node name="PlayerUI" type="Control" unique_id=2048849376]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hfrq2")
+
+[node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=990387514]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1176049254]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.09900001
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -0.15200806
+grow_horizontal = 2
+
+[node name="PlayerHP" parent="HBoxContainer" unique_id=1514143423 instance=ExtResource("1_8tgur")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Text" type="Label" parent="HBoxContainer" unique_id=1170003297]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "00:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerMisc" type="HBoxContainer" parent="HBoxContainer" unique_id=1969161778]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Gold" type="Label" parent="HBoxContainer/PlayerMisc" unique_id=986016683]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Gold: 00"
+
+[node name="Deck" type="ColorRect" parent="HBoxContainer/PlayerMisc" unique_id=892236464]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="Map" type="ColorRect" parent="HBoxContainer/PlayerMisc" unique_id=2053448685]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+color = Color(1, 0, 0, 1)
+
+[node name="HandForward" type="HBoxContainer" parent="." unique_id=425833680]
+layout_mode = 0
+offset_left = 552.0
+offset_top = 552.0
+offset_right = 600.0
+offset_bottom = 600.0
+
+[node name="HandSide" type="Control" parent="." unique_id=133494349]
+anchors_preset = 0
+offset_left = 808.0
+offset_top = 552.0
+offset_right = 856.0
+offset_bottom = 600.0
+
+[node name="Deck" type="ColorRect" parent="." unique_id=507506518]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -96.0
+offset_right = 80.0
+offset_bottom = -56.0
+grow_vertical = 0
+
+[node name="Discard" type="ColorRect" parent="." unique_id=348463934]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -96.0
+offset_right = -40.0
+offset_bottom = -56.0
+grow_horizontal = 0
+grow_vertical = 0

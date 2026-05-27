@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 @export var health: int
-@export var action_points: int
+@export var action_points: int = 3
 @export var speed: float = 0.2
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
