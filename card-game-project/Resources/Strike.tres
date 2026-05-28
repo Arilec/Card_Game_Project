@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Card" format=3 uid="uid://djxek4aaa2rba"]
+
+[ext_resource type="Script" uid="uid://cwxowhlyo4icx" path="res://Scripts/card.gd" id="1_g131c"]
+
+[resource]
+script = ExtResource("1_g131c")
+card_name = "Strike"
+ap_cost = 1
+does_damage = true
+damage = 6
+metadata/_custom_type_script = "uid://cwxowhlyo4icx"

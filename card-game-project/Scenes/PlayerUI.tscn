@@ -78,7 +78,7 @@ offset_top = 552.0
 offset_right = 856.0
 offset_bottom = 600.0
 
-[node name="Deck" type="ColorRect" parent="." unique_id=507506518]
+[node name="Deck" type="Button" parent="." unique_id=498243578]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -88,6 +88,7 @@ offset_top = -96.0
 offset_right = 80.0
 offset_bottom = -56.0
 grow_vertical = 0
+action_mode = 0
 
 [node name="Discard" type="ColorRect" parent="." unique_id=348463934]
 layout_mode = 1

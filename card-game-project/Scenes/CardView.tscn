@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://syhk4uuj1mfs"]
 
 [ext_resource type="Script" uid="uid://bpipkchsq7kxm" path="res://Scripts/card_view.gd" id="1_0gdap"]
-[ext_resource type="Texture2D" uid="uid://dctymqv41w1fj" path="res://icon.svg" id="1_md31b"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0gdap"]
 font_size = 12
@@ -49,11 +48,9 @@ offset_bottom = 202.0
 text = "This is a card. It has Abilities. "
 fit_content = true
 
-[node name="Graphics" type="TextureRect" parent="ColorRect" unique_id=2039823574]
+[node name="Graphics" type="ColorRect" parent="ColorRect" unique_id=1752701561]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 22.0
 offset_right = 155.0
 offset_bottom = 126.0
-texture = ExtResource("1_md31b")
-expand_mode = 1
