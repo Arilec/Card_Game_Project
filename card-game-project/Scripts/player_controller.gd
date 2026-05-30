@@ -1,10 +1,9 @@
 extends Control
 class_name PlayerController
 
-const CardView := preload("res://Scenes/CardView.tscn")
-
-var hand: Array[Card]
-var deck: Array[Card]
+@onready var hand: Control = $Hand
+#top deck is max index
+var deck: Deck = WarriorDeck.new()
 var discard: Array[Card]
 
 var is_player_turn: bool = true
@@ -12,20 +11,15 @@ var is_player_turn: bool = true
 @export var player_ref: Player
 @onready var player_ui: PlayerController = $"."
 
-@onready var hand_forward: Control = $HandForward
-@onready var deck_container: ColorRect = $Deck
+@onready var deck_container: Button = $Deck
 
 func add_to_hand(card_data: Card) -> void:
-	var view := CardView.instantiate()
-	hand_forward.add_child(view)
-	view.setup(card_data)
-	
+	hand.draw_card(card_data, deck_container.position)
+
 #end turn
 func end_turn() -> void:
 	pass
-
-func add_card(card: Card) -> void:
-	pass
-
-func remove_card(card: Card) -> void:
-	pass
+	
+func _on_deck_pressed() -> void:
+	if deck.get_size() > 0:
+		add_to_hand(deck.remove_card(deck.get_size()-1))

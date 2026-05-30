@@ -5,52 +5,85 @@
 [sub_resource type="LabelSettings" id="LabelSettings_0gdap"]
 font_size = 12
 
-[node name="CardView" type="Control" unique_id=1549294561]
-layout_mode = 3
-anchors_preset = 0
+[node name="CardView" type="ColorRect" unique_id=1628900385]
+show_behind_parent = true
+anchors_preset = -1
+anchor_right = 0.13900001
+anchor_bottom = 0.34600002
+offset_right = -0.12802124
+offset_bottom = -0.20800781
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(80, 112)
+color = Color(0.58707833, 0.58707833, 0.58707833, 1)
 script = ExtResource("1_0gdap")
+metadata/_edit_use_anchors_ = true
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=354624149]
-layout_mode = 0
-offset_right = 160.0
-offset_bottom = 224.0
-color = Color(0.47788018, 0.47788012, 0.47788012, 1)
-
-[node name="Name" type="Label" parent="ColorRect" unique_id=545335638]
-layout_mode = 0
-offset_right = 129.0
-offset_bottom = 37.0
+[node name="Name" type="Label" parent="." unique_id=545335638]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -201.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Card_name"
+metadata/_edit_use_anchors_ = true
 
-[node name="Cost" type="Label" parent="ColorRect" unique_id=164090583]
-layout_mode = 0
+[node name="Cost" type="Label" parent="." unique_id=164090583]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 128.0
 offset_top = 1.0
-offset_right = 168.0
-offset_bottom = 33.0
+offset_right = -8.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "X"
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
-[node name="Typeline" type="Label" parent="ColorRect" unique_id=1199938864]
-layout_mode = 0
+[node name="Typeline" type="Label" parent="." unique_id=1199938864]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_top = 127.0
-offset_right = 155.0
-offset_bottom = 150.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "card_type(s)"
 label_settings = SubResource("LabelSettings_0gdap")
+metadata/_edit_use_anchors_ = true
 
-[node name="Description" type="RichTextLabel" parent="ColorRect" unique_id=761143584]
-layout_mode = 0
+[node name="Description" type="RichTextLabel" parent="." unique_id=761143584]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = 2.0
 offset_top = 144.0
-offset_right = 152.0
-offset_bottom = 202.0
+offset_right = 3.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "This is a card. It has Abilities. "
 fit_content = true
+metadata/_edit_use_anchors_ = true
 
-[node name="Graphics" type="ColorRect" parent="ColorRect" unique_id=1752701561]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 22.0
-offset_right = 155.0
-offset_bottom = 126.0
+[node name="Graphics" type="ColorRect" parent="." unique_id=1752701561]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.004
+anchor_right = 1.0
+anchor_bottom = 1.0089285
+offset_left = 16.0
+offset_top = 23.104
+offset_right = -112.0
+offset_bottom = -178.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+metadata/_edit_use_anchors_ = true
