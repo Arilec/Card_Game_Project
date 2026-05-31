@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://crq4p00c84lrf" path="res://Scripts/hand.gd" id="3_jrycd"]
 
 [sub_resource type="Curve" id="Curve_jrycd"]
-_data = [Vector2(0.007462688, 0.9917617), 0.0, -5.703633, 0, 0, Vector2(0.51990044, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 5.7, 0.0, 0, 0]
+_data = [Vector2(0.0024875626, 0.997436), 0.0, -5.703633, 0, 0, Vector2(0.51990044, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 5.7, 0.0, 0, 0]
 point_count = 3
 
 [node name="PlayerUI" type="Control" unique_id=2048849376]
