@@ -1,7 +1,7 @@
 extends Control
 
 const CardView := preload("res://Scenes/CardView.tscn")
-
+var tween: Tween
 
 var hand_content: Array[Card] = []
 var card_views: Array[Control] = []
@@ -14,8 +14,11 @@ var card_views: Array[Control] = []
 @export var card_width: float = 160.0
 @export var card_spacing: float = 40.0
 
-@export_category("Animation")
+@export_category("Animation and Visuals")
 @export var anim_speed: float = 0.1
+@export var hover_offset: float = 30.0
+var save_position: Vector2
+var card_is_dragging: bool = false
 
 #handles whenever the player draws a card
 func draw_card(card_data: Card, deck_location: Vector2) -> void:
@@ -29,7 +32,9 @@ func draw_card(card_data: Card, deck_location: Vector2) -> void:
 
 #organizes the hand spread and animates the cards	
 func organize_hand(cards: Array) -> void:
-	var tween = create_tween().set_parallel(true)
+	if tween:
+		tween.kill()
+	tween = create_tween().set_parallel(true)
 	for i in cards.size():
 		var card: Control = cards[i]
 		var layout := position_card(card, i, cards.size())
@@ -62,3 +67,30 @@ func position_card(card: Control, index: int, total: int) -> Dictionary:
 		"position": Vector2(x, y),
 		"rotation": angle_rad,
 	}
+
+func connect_card_signals(card_view: Control):
+	card_view.connect("mouse_entered_card", _on_card_view_mouse_entered_card)
+	card_view.connect("mouse_exited_card", _on_card_view_mouse_exited_card)
+	card_view.connect("mouse_release", _on_card_view_mouse_release)
+	card_view.connect("mouse_pressed", _on_card_view_mouse_pressed)
+
+func _on_card_view_mouse_entered_card(card_view: Control) -> void:
+	if tween:
+		tween.kill()
+	tween = create_tween().set_parallel(true)
+	save_position = card_view.position
+	if card_view.card_hovering  && card_is_dragging && !card_view.card_dragging:
+		tween.tween_property(card_view, "position", save_position - Vector2(0, hover_offset), anim_speed).set_trans(Tween.TRANS_SINE)
+		tween.tween_property(card_view, "rotation", 0.0, anim_speed).set_trans(Tween.TRANS_SINE)
+		await tween.finished
+
+func _on_card_view_mouse_exited_card(card_view: Control) -> void:
+	if   card_is_dragging && !card_view.card_dragging:
+		organize_hand(card_views)
+	
+func _on_card_view_mouse_release(card_view: Control) -> void:
+	card_is_dragging = false
+	organize_hand(card_views)
+	
+func _on_card_view_mouse_pressed(card_view: Control) -> void:
+	card_is_dragging = true

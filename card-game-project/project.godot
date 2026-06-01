@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Grid="*uid://d5qp72y2hbvg"
 
+[display]
+
+window/stretch/mode="viewport"
+
 [editor]
 
 version_control/autoload_on_startup=true

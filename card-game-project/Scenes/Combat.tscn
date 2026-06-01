@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cuaxi8s32q4qj"]
 
 [ext_resource type="Script" uid="uid://bv4ydkxq0reqr" path="res://Scripts/combat.gd" id="1_5y3t8"]
+[ext_resource type="PackedScene" uid="uid://xpp318gwbxla" path="res://Scenes/PlayerUI.tscn" id="2_jr68y"]
 [ext_resource type="PackedScene" uid="uid://cnynxeldao3nj" path="res://Scenes/Player.tscn" id="3_jr68y"]
 
 [node name="Combat" type="Node2D" unique_id=1165033110 node_paths=PackedStringArray("path_line")]
@@ -17,3 +18,9 @@ position = Vector2(16, 138)
 [node name="Line2D" type="Line2D" parent="." unique_id=1254911134]
 width = 4.0
 default_color = Color(0, 1, 1, 1)
+
+[node name="PlayerUI" parent="." unique_id=2048849376 instance=ExtResource("2_jr68y")]
+offset_left = -96.0
+offset_top = -8.0
+offset_right = 288.0
+offset_bottom = 200.0

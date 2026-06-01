@@ -9,6 +9,7 @@ _data = [Vector2(0.0024875626, 0.997436), 0.0, -5.703633, 0, 0, Vector2(0.519900
 point_count = 3
 
 [node name="PlayerUI" type="Control" unique_id=2048849376]
+custom_minimum_size = Vector2(16, 9)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,11 +30,11 @@ grow_vertical = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 0.09900001
+anchor_bottom = 1.0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = -16.0
-offset_bottom = -0.15200806
+offset_bottom = -584.0
 grow_horizontal = 2
 
 [node name="PlayerHP" parent="HBoxContainer" unique_id=1514143423 instance=ExtResource("1_8tgur")]
@@ -71,12 +72,13 @@ color = Color(1, 0, 0, 1)
 
 [node name="Hand" type="Control" parent="." unique_id=712790500]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 320.0
-offset_top = 488.0
-offset_right = -320.0
+offset_left = -256.0
+offset_top = -160.0
+offset_right = 256.0
 offset_bottom = -160.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -93,15 +95,14 @@ offset_bottom = 600.0
 
 [node name="Deck" type="Button" parent="." unique_id=498243578]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 2
+anchor_top = 1.0
 anchor_bottom = 1.0
 offset_left = 40.0
-offset_top = 552.0
-offset_right = -1072.0
+offset_top = -96.0
+offset_right = 80.0
 offset_bottom = -56.0
-grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 action_mode = 0
 
 [node name="Discard" type="ColorRect" parent="." unique_id=348463934]
