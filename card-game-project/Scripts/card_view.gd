@@ -10,7 +10,10 @@ const SIZE := Vector2(160.0, 224.0)
 var card_hovering: bool = false
 var card_dragging: bool = false
 var offset: Vector2 = Vector2(0, 0)
+var home_position: Vector2
+var home_rotation: float
 
+var tween: Tween
 #signals
 signal mouse_entered_card
 signal mouse_exited_card
@@ -21,7 +24,7 @@ var card_data: Card
 
 func _process(delta: float) -> void:
 	if card_dragging: 
-		position = get_global_mouse_position() - offset
+		global_position = get_global_mouse_position() - offset
 	
 func setup(data: Card) -> void:
 	card_data = data
@@ -42,7 +45,7 @@ func _on_button_mouse_exited() -> void:
 
 func _on_button_button_down() -> void:
 	card_dragging = true
-	offset = get_global_mouse_position()
+	offset = get_global_mouse_position() - global_position
 	mouse_pressed.emit(self)
 
 func _on_button_button_up() -> void:

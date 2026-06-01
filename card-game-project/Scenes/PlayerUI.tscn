@@ -3,12 +3,16 @@
 [ext_resource type="PackedScene" uid="uid://b4edc27ys72cf" path="res://Scenes/PlayerHP.tscn" id="1_8tgur"]
 [ext_resource type="Script" uid="uid://djg7c0yyvn8gl" path="res://Scripts/player_controller.gd" id="1_hfrq2"]
 [ext_resource type="Script" uid="uid://crq4p00c84lrf" path="res://Scripts/hand.gd" id="3_jrycd"]
+[ext_resource type="PackedScene" uid="uid://cnynxeldao3nj" path="res://Scenes/Player.tscn" id="4_qv4fw"]
 
 [sub_resource type="Curve" id="Curve_jrycd"]
 _data = [Vector2(0.0024875626, 0.997436), 0.0, -5.703633, 0, 0, Vector2(0.51990044, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 5.7, 0.0, 0, 0]
 point_count = 3
 
-[node name="PlayerUI" type="Control" unique_id=2048849376]
+[sub_resource type="LabelSettings" id="LabelSettings_jrycd"]
+font_size = 42
+
+[node name="PlayerUI" type="Control" unique_id=2048849376 node_paths=PackedStringArray("player_ref")]
 custom_minimum_size = Vector2(16, 9)
 layout_mode = 3
 anchors_preset = 15
@@ -17,6 +21,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hfrq2")
+player_ref = NodePath("Player")
 
 [node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=990387514]
 layout_mode = 1
@@ -72,6 +77,7 @@ color = Color(1, 0, 0, 1)
 
 [node name="Hand" type="Control" parent="." unique_id=712790500]
 layout_mode = 1
+anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -85,6 +91,21 @@ grow_vertical = 2
 pivot_offset = Vector2(256, 0)
 script = ExtResource("3_jrycd")
 fan_curve = SubResource("Curve_jrycd")
+
+[node name="AP_graphic" type="Label" parent="Hand" unique_id=450389088]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -208.0
+offset_top = 54.0
+offset_right = -152.0
+offset_bottom = 112.0
+grow_vertical = 0
+text = "0"
+label_settings = SubResource("LabelSettings_jrycd")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HandSide" type="Control" parent="." unique_id=133494349]
 anchors_preset = 0
@@ -105,7 +126,7 @@ offset_bottom = -56.0
 grow_vertical = 0
 action_mode = 0
 
-[node name="Discard" type="ColorRect" parent="." unique_id=348463934]
+[node name="Discard" type="Button" parent="." unique_id=153856418]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -119,4 +140,8 @@ offset_bottom = -56.0
 grow_horizontal = 0
 grow_vertical = 0
 
+[node name="Player" parent="." unique_id=519002845 instance=ExtResource("4_qv4fw")]
+visible = false
+
 [connection signal="pressed" from="Deck" to="." method="_on_deck_pressed"]
+[connection signal="pressed" from="Discard" to="." method="_on_discard_pressed"]
