@@ -319,10 +319,10 @@ graph TD
 - [x] Card data structure defined (just a script/resource, no UI yet)
 
 ### Week 3 — Cards & AP
-- [ ] Hand UI: 5 cards visible, drawable from a deck
-- [ ] Click a card to "play" it (just log to console for now)
-- [ ] AP system: 3 AP per turn, costs deducted on play
-- [ ] End turn button
+- [x] Hand UI: 5 cards visible, drawable from a deck
+- [x] Click a card to "play" it (just log to console for now)
+- [x] AP system: 3 AP per turn, costs deducted on play
+- [x] End turn button
 
 ### Week 4 — First Combat
 - [ ] Goblin enemy with basic AI (move toward player, attack adjacent)
