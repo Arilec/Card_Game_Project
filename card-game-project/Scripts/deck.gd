@@ -23,6 +23,6 @@ func remove_card(card_index: int) -> Card:
 func get_size() -> int:
 	return _ninetynine.size()
 
-func print_debug() -> void:
+func debug_contents() -> void:
 	for card in _ninetynine:
 		print(card.card_name)

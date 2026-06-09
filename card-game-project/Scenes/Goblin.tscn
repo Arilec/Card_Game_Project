@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://ii60lh7lr70a"]
+
+[ext_resource type="Texture2D" uid="uid://cawig408bnenw" path="res://Assets/brackeys_platformer_assets/sprites/slime_green.png" id="1_564fj"]
+[ext_resource type="Script" uid="uid://cvuw7yt8hyauj" path="res://Scenes/goblin.gd" id="1_wqigr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqigr"]
+atlas = ExtResource("1_564fj")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_128dr"]
+atlas = ExtResource("1_564fj")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjpl2"]
+atlas = ExtResource("1_564fj")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02kj1"]
+atlas = ExtResource("1_564fj")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gjpl2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqigr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_128dr")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gjpl2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02kj1")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_02kj1"]
+size = Vector2(32, 32)
+
+[node name="Goblin" type="CharacterBody2D" unique_id=111580507]
+script = ExtResource("1_wqigr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=175481947]
+position = Vector2(0, -5)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_gjpl2")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1466940116]
+shape = SubResource("RectangleShape2D_02kj1")

@@ -3,10 +3,11 @@
 [ext_resource type="Script" uid="uid://bv4ydkxq0reqr" path="res://Scripts/combat.gd" id="1_5y3t8"]
 [ext_resource type="PackedScene" uid="uid://xpp318gwbxla" path="res://Scenes/PlayerUI.tscn" id="2_jr68y"]
 [ext_resource type="PackedScene" uid="uid://cnynxeldao3nj" path="res://Scenes/Player.tscn" id="3_jr68y"]
+[ext_resource type="Script" uid="uid://bmur5bakce570" path="res://Scripts/player_movement.gd" id="4_rq8dt"]
+[ext_resource type="PackedScene" uid="uid://ii60lh7lr70a" path="res://Scenes/Goblin.tscn" id="5_0dhp0"]
 
-[node name="Combat" type="Node2D" unique_id=1165033110 node_paths=PackedStringArray("path_line")]
+[node name="Combat" type="Node2D" unique_id=1165033110]
 script = ExtResource("1_5y3t8")
-path_line = NodePath("Line2D")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=177422705]
 position = Vector2(96, 96)
@@ -14,14 +15,23 @@ zoom = Vector2(3, 3)
 
 [node name="Player" parent="." unique_id=519002845 instance=ExtResource("3_jr68y")]
 position = Vector2(16, 138)
+health = 50
 
 [node name="Line2D" type="Line2D" parent="." unique_id=1254911134]
 width = 4.0
 default_color = Color(0, 1, 1, 1)
 
 [node name="PlayerUI" parent="." unique_id=2048849376 instance=ExtResource("2_jr68y")]
+z_index = 100
 offset_left = -100.00001
 offset_top = -14.0
 offset_right = 1052.0
 offset_bottom = 634.0
 scale = Vector2(0.34, 0.34)
+
+[node name="PlayerMovement" type="Node" parent="." unique_id=1805560522]
+script = ExtResource("4_rq8dt")
+
+[node name="Goblin" parent="." unique_id=111580507 instance=ExtResource("5_0dhp0")]
+position = Vector2(144, 112)
+health = 10

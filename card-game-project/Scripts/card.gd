@@ -39,7 +39,7 @@ enum DamageApplied { TARGET, ALL, WITHIN }
 func _validate_property(property: Dictionary) -> void:
 	if property.name in ["damage", "affects"] and not does_damage:
 		property.usage |= PROPERTY_USAGE_READ_ONLY
-	if property.name in "block" and not gives_block:
+	if property.name == "block" and not gives_block:
 		property.usage |= PROPERTY_USAGE_READ_ONLY
 
 func play(target = "self"):

@@ -12,7 +12,7 @@ point_count = 3
 [sub_resource type="LabelSettings" id="LabelSettings_jrycd"]
 font_size = 42
 
-[node name="PlayerUI" type="Control" unique_id=2048849376 node_paths=PackedStringArray("player_ref")]
+[node name="PlayerUI" type="Control" unique_id=2048849376 node_paths=PackedStringArray("player")]
 custom_minimum_size = Vector2(16, 9)
 layout_mode = 3
 anchors_preset = 15
@@ -21,7 +21,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hfrq2")
-player_ref = NodePath("Player")
+player = NodePath("Player")
 
 [node name="ReferenceRect" type="ReferenceRect" parent="." unique_id=990387514]
 layout_mode = 1

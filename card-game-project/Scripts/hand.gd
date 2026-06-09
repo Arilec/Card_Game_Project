@@ -1,4 +1,5 @@
 extends Control
+class_name Hand
 
 const CardView := preload("res://Scenes/CardView.tscn")
 
@@ -19,16 +20,16 @@ var card_views: Array[Control] = []
 var save_position: Vector2
 
 @export_category("Play Cards")
-@export var play_card_offset: float = 150.0
-var spendable_ap: int
+@export var play_card_offset: float = 50.0
+var player: Player
 
 #references
 @onready var ap_graphic: Label = $AP_graphic
 
 #updates action point data and graphics
 func update_action_points(ap: int) -> void:
-	spendable_ap = ap
-	ap_graphic.text = str(spendable_ap)
+	player.update_action_points(ap)
+	ap_graphic.text = str(ap)
 	
 #handles whenever the player draws a card
 func draw_card(card_data: Card, deck_location: Vector2) -> void:
@@ -84,6 +85,7 @@ func position_card(card: Control, index: int, total: int) -> Dictionary:
 		"rotation": angle_rad,
 	}
 
+#starts connecting signals to functions
 func connect_card_signals(card_view: Control):
 	card_view.connect("mouse_entered_card", _on_card_view_mouse_entered_card)
 	card_view.connect("mouse_exited_card", _on_card_view_mouse_exited_card)
@@ -102,7 +104,7 @@ func _on_card_view_mouse_exited_card(card_view: Control) -> void:
 	
 func _on_card_view_mouse_release(card_view: Control) -> void:
 	if card_view.global_position.y < global_position.y - play_card_offset:
-		if card_view.card_data.ap_cost <= spendable_ap:
+		if card_view.card_data.ap_cost <= player.spendable_ap:
 			card_is_played(card_view)
 	organize_hand(card_views)
 
@@ -115,7 +117,7 @@ func card_is_played(card_view: Control) -> void:
 	var card := remove_card(card_view)
 	print(card.card_name + " is played")
 	card.play()
-	update_action_points(spendable_ap - card.ap_cost)
+	update_action_points(player.spendable_ap - card.ap_cost)
 
 #disconnects and removes child card node
 func remove_card(view: Control) -> Card:
