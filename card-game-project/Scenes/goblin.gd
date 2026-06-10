@@ -23,11 +23,19 @@ func walk_path(path: Array[Vector2i]) -> void:
 		return
 	tween = create_tween()
 	animated_sprite.play("Run")
-	for cell in path.slice(1):
+	for cell in path:
 		var world_pos = Grid.grid_to_world(cell)
 		tween.tween_property(self, "global_position", world_pos, speed)
 	await tween.finished
 	animated_sprite.play("Idle")
 
-func take_turn(combat_state):
-	pass
+#enemy turn sequence (different for each enemy
+func take_turn(combat_state, path: Array[Vector2i]):
+	spendable_ap = action_points
+	var commit_path = path.slice(1, spendable_ap + 1)
+	await walk_path(commit_path)
+	spendable_ap -= commit_path.size()
+	if spendable_ap < 0:
+		spendable_ap = 0
+	if Grid.is_in_range(self, combat_state.player, 1) && spendable_ap > 0:
+		print("stab")

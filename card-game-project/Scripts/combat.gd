@@ -7,7 +7,7 @@ extends Node2D
 @onready var path_line: Line2D = $Line2D
 
 #Enemy References
-@onready var goblin: Goblin = $Goblin
+@onready var goblin: Enemy = $Goblin
 
 #Player UI References
 @onready var player_ui: PlayerController = $PlayerUI
@@ -47,5 +47,4 @@ func _input(event: InputEvent) -> void:
 
 func do_enemy_turn() -> void:
 	var path = pathfinder.pathfinder_logic.get_id_path(goblin.current_cell, player.current_cell)
-	await goblin.walk_path(path.slice(0, -1))
-	print("Stab")
+	goblin.take_turn(self, path)
