@@ -23,13 +23,8 @@ var save_position: Vector2
 @export var play_card_offset: float = 50.0
 var player: Player
 
-#references
-@onready var ap_graphic: Label = $AP_graphic
-
-#updates action point data and graphics
-func update_action_points(ap: int) -> void:
-	player.update_action_points(ap)
-	ap_graphic.text = str(ap)
+signal card_grabbed
+signal card_released
 	
 #handles whenever the player draws a card
 func draw_card(card_data: Card, deck_location: Vector2) -> void:
@@ -103,21 +98,25 @@ func _on_card_view_mouse_exited_card(card_view: Control) -> void:
 	_tween_card_to(card_view, card_view.home_position, card_view.home_rotation)
 	
 func _on_card_view_mouse_release(card_view: Control) -> void:
+	card_released.emit(get_global_mouse_position(), card_view)
+	
+	"""
 	if card_view.global_position.y < global_position.y - play_card_offset:
 		if card_view.card_data.ap_cost <= player.spendable_ap:
 			card_is_played(card_view)
 	organize_hand(card_views)
+	"""
 
 
 func _on_card_view_mouse_pressed(card_view: Control) -> void:
-	pass
+	card_grabbed.emit(card_view)
 	
 #handles card being played
 func card_is_played(card_view: Control) -> void:
 	var card := remove_card(card_view)
 	print(card.card_name + " is played")
 	card.play()
-	update_action_points(player.spendable_ap - card.ap_cost)
+	player.update_action_points(player.spendable_ap - card.ap_cost)
 
 #disconnects and removes child card node
 func remove_card(view: Control) -> Card:

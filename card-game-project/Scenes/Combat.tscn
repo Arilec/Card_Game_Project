@@ -15,23 +15,24 @@ zoom = Vector2(3, 3)
 
 [node name="Player" parent="." unique_id=519002845 instance=ExtResource("3_jr68y")]
 position = Vector2(16, 138)
-health = 50
+max_health = 50
 
 [node name="Line2D" type="Line2D" parent="." unique_id=1254911134]
 width = 4.0
 default_color = Color(0, 1, 1, 1)
 
-[node name="PlayerUI" parent="." unique_id=2048849376 instance=ExtResource("2_jr68y")]
+[node name="PlayerUI" parent="." unique_id=2048849376 node_paths=PackedStringArray("player") instance=ExtResource("2_jr68y")]
 z_index = 100
 offset_left = -100.00001
 offset_top = -14.0
 offset_right = 1052.0
 offset_bottom = 634.0
 scale = Vector2(0.34, 0.34)
+player = NodePath("../Player")
 
 [node name="PlayerMovement" type="Node" parent="." unique_id=1805560522]
 script = ExtResource("4_rq8dt")
 
 [node name="Goblin" parent="." unique_id=111580507 instance=ExtResource("5_0dhp0")]
 position = Vector2(144, 112)
-health = 10
+max_health = 10

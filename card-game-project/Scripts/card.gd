@@ -26,6 +26,7 @@ enum DamageApplied { TARGET, ALL, WITHIN }
 
 @export var damage: int = 0
 @export var affects: DamageApplied
+@export var range: int = 1
 
 #Block abilities
 @export var gives_block: bool = false:

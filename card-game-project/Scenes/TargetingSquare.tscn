@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://f3ux2xwtp1hu"]
+
+[ext_resource type="Script" uid="uid://d4ggj3882kko3" path="res://Scenes/targeting_square.gd" id="1_y38ty"]
+
+[node name="TargetingSquare" type="Node2D" unique_id=379054413]
+script = ExtResource("1_y38ty")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=237781944]
+offset_right = 32.0
+offset_bottom = 32.0
+pivot_offset = Vector2(16, 16)
+size_flags_horizontal = 4
+color = Color(0.99997836, 0.51181066, 0.5006406, 0.49803922)

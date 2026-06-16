@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ii60lh7lr70a"]
 
 [ext_resource type="Texture2D" uid="uid://cawig408bnenw" path="res://Assets/brackeys_platformer_assets/sprites/slime_green.png" id="1_564fj"]
-[ext_resource type="Script" uid="uid://cvuw7yt8hyauj" path="res://Scenes/goblin.gd" id="1_wqigr"]
+[ext_resource type="Script" uid="uid://cvuw7yt8hyauj" path="res://Scripts/goblin.gd" id="1_wqigr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wqigr"]
 atlas = ExtResource("1_564fj")

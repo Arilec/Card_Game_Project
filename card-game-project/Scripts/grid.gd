@@ -5,16 +5,12 @@ extends Node
 const SIZE: Vector2i = Vector2i(6, 6)
 const CELL_SIZE: Vector2 = Vector2(32, 32)
 
-"""
-enum CDirections { NORTH, EAST, SOUTH, WEST }
-
-var directions: Dictionary = {
-	CDirections.NORTH: Vector2i(0, -1),
-	CDirections.EAST: Vector2i(1, 0), 
-	CDirections.SOUTH: Vector2i(0, 1), 
-	CDirections.WEST: Vector2i(-1, 0)
-}
-"""
+const CARDINAL_DIRECTIONS: Array[Vector2i] = [
+	Vector2i(0, -1), #N
+	Vector2i(1, 0), #E
+	Vector2i(0, 1), #S
+	Vector2i(-1, 0) #W
+]
 
 #Converts Pixel Coords to Vector grid locations
 func world_to_grid(world_pos: Vector2) -> Vector2i:
