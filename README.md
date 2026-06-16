@@ -328,8 +328,8 @@ graph TD
 - [x] Goblin enemy with basic AI (move toward player, attack adjacent)
 - [x] HP system for player and enemies
 - [x] Damage from Strike works
-- [ ] Enemies die and disappear
-- [ ] Win/lose detection (all enemies dead = win, player HP 0 = lose)
+- [x] Enemies die and disappear
+- [x] Win/lose detection (all enemies dead = win, player HP 0 = lose)
 
 ### Week 5 — Defense & Polish Combat
 - [ ] Block mechanic (Defend card works, resets each turn)
