@@ -325,9 +325,9 @@ graph TD
 - [x] End turn button
 
 ### Week 4 — First Combat
-- [ ] Goblin enemy with basic AI (move toward player, attack adjacent)
-- [ ] HP system for player and enemies
-- [ ] Damage from Strike works
+- [x] Goblin enemy with basic AI (move toward player, attack adjacent)
+- [x] HP system for player and enemies
+- [x] Damage from Strike works
 - [ ] Enemies die and disappear
 - [ ] Win/lose detection (all enemies dead = win, player HP 0 = lose)
 
