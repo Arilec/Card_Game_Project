@@ -1,11 +1,18 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://djxek4aaa2rba"]
 
 [ext_resource type="Script" uid="uid://cwxowhlyo4icx" path="res://Scripts/card.gd" id="1_g131c"]
+[ext_resource type="Script" uid="uid://dj4chjmkdm2ih" path="res://Scripts/card_effect.gd" id="1_l36xq"]
+[ext_resource type="Script" uid="uid://bigwjlje0lggs" path="res://Scripts/damage_effect.gd" id="2_t1lgp"]
+
+[sub_resource type="Resource" id="Resource_38xsd"]
+script = ExtResource("2_t1lgp")
+this_amount = 6
+metadata/_custom_type_script = "uid://bigwjlje0lggs"
 
 [resource]
 script = ExtResource("1_g131c")
 card_name = "Strike"
 ap_cost = 1
-does_damage = true
-damage = 6
+effects = Array[ExtResource("1_l36xq")]([SubResource("Resource_38xsd")])
+target_type = 1
 metadata/_custom_type_script = "uid://cwxowhlyo4icx"

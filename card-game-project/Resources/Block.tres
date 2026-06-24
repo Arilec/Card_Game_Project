@@ -1,12 +1,19 @@
 [gd_resource type="Resource" script_class="Card" format=3 uid="uid://bwjiqjonv2mum"]
 
+[ext_resource type="Script" uid="uid://dj4chjmkdm2ih" path="res://Scripts/card_effect.gd" id="1_havjd"]
 [ext_resource type="Script" uid="uid://cwxowhlyo4icx" path="res://Scripts/card.gd" id="1_lxa84"]
+[ext_resource type="Script" uid="uid://cgrtuii8s22ae" path="res://Scripts/block_effect.gd" id="2_x63dj"]
+
+[sub_resource type="Resource" id="Resource_jic6y"]
+script = ExtResource("2_x63dj")
+this_amount = 5
+metadata/_custom_type_script = "uid://cgrtuii8s22ae"
 
 [resource]
 script = ExtResource("1_lxa84")
 card_name = "Block"
 ap_cost = 1
 type = 1
-gives_block = true
-block = 5
+effects = Array[ExtResource("1_havjd")]([SubResource("Resource_jic6y")])
+range = 0
 metadata/_custom_type_script = "uid://cwxowhlyo4icx"

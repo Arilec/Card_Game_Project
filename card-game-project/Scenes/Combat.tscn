@@ -35,4 +35,3 @@ script = ExtResource("4_rq8dt")
 
 [node name="Goblin" parent="." unique_id=111580507 instance=ExtResource("5_0dhp0")]
 position = Vector2(144, 112)
-max_health = 10

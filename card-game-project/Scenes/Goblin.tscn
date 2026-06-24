@@ -3,6 +3,22 @@
 [ext_resource type="Texture2D" uid="uid://cawig408bnenw" path="res://Assets/brackeys_platformer_assets/sprites/slime_green.png" id="1_564fj"]
 [ext_resource type="Script" uid="uid://cvuw7yt8hyauj" path="res://Scripts/goblin.gd" id="1_wqigr"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0stx"]
+atlas = ExtResource("1_564fj")
+region = Rect2(0, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_428mb"]
+atlas = ExtResource("1_564fj")
+region = Rect2(24, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8wau"]
+atlas = ExtResource("1_564fj")
+region = Rect2(48, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxja1"]
+atlas = ExtResource("1_564fj")
+region = Rect2(72, 48, 24, 24)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_wqigr"]
 atlas = ExtResource("1_564fj")
 region = Rect2(0, 24, 24, 24)
@@ -21,6 +37,23 @@ region = Rect2(48, 0, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gjpl2"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b0stx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_428mb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c8wau")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xxja1")
+}],
+"loop": false,
+"name": &"Hit",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wqigr")
@@ -42,25 +75,24 @@ animations = [{
 "loop": true,
 "name": &"Run",
 "speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"default",
-"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_02kj1"]
 size = Vector2(32, 32)
 
-[node name="Goblin" type="CharacterBody2D" unique_id=111580507]
+[node name="Goblin" type="CharacterBody2D" unique_id=111580507 node_paths=PackedStringArray("animated_sprite")]
 script = ExtResource("1_wqigr")
+animated_sprite = NodePath("AnimatedSprite2D")
+max_health = 10
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=175481947]
 position = Vector2(0, -5)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_gjpl2")
-animation = &"Idle"
+animation = &"Hit"
 autoplay = "Idle"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1466940116]
 shape = SubResource("RectangleShape2D_02kj1")

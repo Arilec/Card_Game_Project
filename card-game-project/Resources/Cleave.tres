@@ -6,7 +6,7 @@
 script = ExtResource("1_v0gxa")
 card_name = "Cleave"
 ap_cost = 2
-does_damage = true
-damage = 4
-affects = 1
+effects = null
+targets = 2
+target_type = 1
 metadata/_custom_type_script = "uid://cwxowhlyo4icx"
