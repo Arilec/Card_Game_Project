@@ -78,15 +78,15 @@ func cast_proj(a: Vector2i, b: Vector2i, max_dist: int) -> Array[Vector2i]:
 			var sb = Vector2i(cell.x, cell.y + sy)
 			if _cell_blocks(sa) && _cell_blocks(sb):
 				break
-			if step_x:
-				err -= dy
-				cell.x += sx
-			if step_y:
-				err += dx
-				cell.y += sy
-			if _cell_blocks(cell):
-				break
-			lane.append(cell)
-			if cell == b:
-				break
+		if step_x:
+			err -= dy
+			cell.x += sx
+		if step_y:
+			err += dx
+			cell.y += sy
+		if _cell_blocks(cell):
+			break
+		lane.append(cell)
+		if cell == b:
+			break
 	return lane

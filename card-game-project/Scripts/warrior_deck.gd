@@ -8,6 +8,7 @@ class_name WarriorDeck
 const Strike := preload("res://Resources/Strike.tres")
 const Block := preload("res://Resources/Block.tres")
 const Cleave := preload("res://Resources/Cleave.tres")
+const Charge := preload("res://Resources/Charge.tres")
 
 # -- init
 func _init() -> void:
@@ -15,5 +16,6 @@ func _init() -> void:
 		add_cards(Block)
 	for n in 5:
 		add_cards(Strike)
-	add_cards([Cleave])
+	add_cards([Cleave, Charge])
+	
 	

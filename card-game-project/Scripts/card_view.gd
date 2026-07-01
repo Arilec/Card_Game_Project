@@ -1,4 +1,5 @@
 extends Control
+class_name CardView
 
 ## Visual portion of card
 ## data is taken from Card and put into a graphical card

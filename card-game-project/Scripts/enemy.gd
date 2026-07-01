@@ -49,6 +49,7 @@ func deal_damage(amount: int) -> int:
 ## amount: int
 func take_damage(amount: int) -> void:
 	health -= amount
+	enemy_take_damage.emit(amount)
 	animated_sprite.play("Hit")
 	await animated_sprite.animation_finished
 	animated_sprite.play("Idle")

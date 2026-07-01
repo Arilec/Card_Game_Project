@@ -28,6 +28,8 @@ var discard: Array[Card]
 @onready var ap_graphic: Label = $AP_graphic
 @onready var player_hp: PlayerHP = $HBoxContainer/PlayerHP
 
+# -- combat reference
+@export var combat: Combat
 
 # -- ready
 
@@ -39,20 +41,19 @@ func _ready() -> void:
 	player.connect("player_take_damage", _on_health_update)
 	player.connect("player_max_health_update", _on_health_update)
 	player.connect("player_update_block", _on_block_update)
+	
+	combat.connect("player_turn_started", start_turn)
+	
 	player_hp.update_max_health(player.max_health)
 	player_hp.update_health(player.health)
-	start_turn()
 
 
 # -- player turn
 
 ##starts player turn.
 func start_turn() -> void:
-	player.is_player_turn = true
-	player.reset_block()
-	player.update_action_points(player.action_points)
-	if deck.get_size() >= starting_hand_size:
-		for i in starting_hand_size:
+	for i in starting_hand_size:
+		if deck.get_size() > 0:
 			add_to_hand(deck.remove_card(deck.get_size()-1))
 
 
@@ -72,11 +73,11 @@ func _on_deck_pressed() -> void:
 ##interaction caused by clicking on the discard
 ##currently, it ends turn
 func _on_discard_pressed() -> void:
-	player.end_turn()
 	for card_view in hand.card_views.duplicate():
 		var card = hand.remove_card(card_view)
 		if card:
 			discard.append(card)
+	player.end_turn()
 
 
 # -- update other graphics

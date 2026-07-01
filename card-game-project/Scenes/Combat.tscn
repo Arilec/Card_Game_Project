@@ -21,7 +21,7 @@ max_health = 50
 width = 4.0
 default_color = Color(0, 1, 1, 1)
 
-[node name="PlayerUI" parent="." unique_id=2048849376 node_paths=PackedStringArray("player") instance=ExtResource("2_jr68y")]
+[node name="PlayerUI" parent="." unique_id=2048849376 node_paths=PackedStringArray("player", "combat") instance=ExtResource("2_jr68y")]
 z_index = 100
 offset_left = -100.00001
 offset_top = -14.0
@@ -29,6 +29,7 @@ offset_right = 1052.0
 offset_bottom = 634.0
 scale = Vector2(0.34, 0.34)
 player = NodePath("../Player")
+combat = NodePath("..")
 
 [node name="PlayerMovement" type="Node" parent="." unique_id=1805560522]
 script = ExtResource("4_rq8dt")

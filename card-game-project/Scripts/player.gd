@@ -61,6 +61,16 @@ func walk_path(path: Array[Vector2i]) -> void:
 	await tween.finished
 	animated_sprite.play("Idle")
 
+func charge_path(start: Vector2i, end: Vector2i) -> void:
+	var path: Array[Vector2i] = [start, end]
+	var tween = create_tween()
+	animated_sprite.play("Run") # placeholder
+	var world_pos = Grid.grid_to_world(end)
+	tween.tween_property(self, "global_position", world_pos, speed)
+	await tween.finished
+	animated_sprite.play("Idle")
+
+
 # --combat
 
 ## emits a signal that the player will deal damage and returns the damage dealt.
@@ -120,4 +130,4 @@ func reset_block() -> void:
 func end_turn() -> void:
 	print("I have ended my turn")
 	is_player_turn = false
-	player_end_turn.emit()
+	player_end_turn.emit.call_deferred()

@@ -29,10 +29,12 @@ enum TargetType { SELF, POINT, PROJECTILE }
 
 @export var effects: Array[CardEffect]
 
+@export var damage: int = 0
+@export var block: int = 0
+
 @export var targets: DamageApplied
 
 @export var target_type: TargetType
-
 @export var range: int = 1
 
 

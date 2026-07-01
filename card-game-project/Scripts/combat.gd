@@ -18,6 +18,7 @@ var targeting_squares: Array = []
 # -- Player UI References
 @onready var player_ui: PlayerController = $PlayerUI
 var hand: Hand
+var point_of_play: int = 120
 
 # -- Enemy References
 @onready var goblin: Enemy = $Goblin
@@ -26,6 +27,9 @@ var hand: Hand
 #-- A* initiation
 var pathfinder: Pathfinder
 
+# -- signals
+signal targeting_input(event: InputEvent)
+signal player_turn_started
 
 # -- ready
 
@@ -38,11 +42,12 @@ func _ready() -> void:
 	print(player.is_connected("player_end_turn", do_enemy_turn))
 	
 	hand = player_ui.hand
-	hand.connect("card_grabbed", _begin_targeting)
-	hand.connect("card_released", _end_targeting)
+	#hand.connect("card_grabbed", _begin_targeting)
+	hand.connect("card_released", _card_played)
 	
 	goblin.enemy_dead.connect(_on_enemy_dead.bind(goblin))
-
+	
+	start_player_turn()
 
 # -- grid instancing
 
@@ -59,20 +64,29 @@ func _draw() -> void:
 
 # -- input handling
 
-##general input handler, mainly for mouse
+##general input handler, mainly for mouse inputs
 func _input(event: InputEvent) -> void:
+	if !player.is_player_turn:
+		return
 	var cell = Grid.world_to_grid(get_global_mouse_position())
+	
+	#player movement functionality
 	if event is InputEventMouseButton && event.is_pressed():
 		match event.button_index:
 			MOUSE_BUTTON_LEFT: player_movement.click(cell)
 			MOUSE_BUTTON_RIGHT: player_movement.cancel()
 	elif event is InputEventMouseMotion:
 		player_movement.hover(Grid.world_to_grid(get_global_mouse_position()))
-
+	
+	#player targeting functionality
+	if event is InputEventMouseButton && event.is_pressed():
+		targeting_input.emit(event)
 
 # -- targeting squares logic
 
-
+##Identifies all cells that are targetable for a melee attack
+##origin: Vector2i
+##radius: int
 func targetable_cells(origin: Vector2i, radius: int) -> Array[Vector2i]:
 	var result: Array[Vector2i] = []
 	for y in range(origin.y - radius, origin.y + radius + 1):
@@ -80,12 +94,16 @@ func targetable_cells(origin: Vector2i, radius: int) -> Array[Vector2i]:
 			var cell = Vector2i(x, y)
 			if cell == origin or not Grid.is_within_grid(cell):
 				continue
+			
+			#manhattan targeting
 			var dist = abs(cell.x - origin.x) + abs(cell.y - origin.y)
 			if dist <= radius && pathfinder.has_LOS(origin, cell):
 				result.append(cell)
 	return result
 
-
+##Identifies all cells that are targetable for a ranged attack
+##origin: Vector2i
+##radius: int
 func aimable_cells(origin: Vector2i, radius: int) -> Array[Vector2i]:
 	var result: Array[Vector2i] = []
 	for y in range(origin.y - radius, origin.y + radius + 1):
@@ -93,53 +111,51 @@ func aimable_cells(origin: Vector2i, radius: int) -> Array[Vector2i]:
 			var cell = Vector2i(x, y)
 			if cell == origin or not Grid.is_within_grid(cell):
 				continue
+			
+			#manhattan targeting
 			if abs(cell.x - origin.x) + abs(cell.y - origin.y) <= radius:
 				result.append(cell)
 	return result
 
-##starts the targetting process for the players cards based on card_view data
+##starts the targetting process for the players cards based on card_data
+##called by card_effect when first resolving
 ##card_view: Control
-func _begin_targeting(card_view: Control):
-	var card_data = card_view.card_data
+func _begin_targeting(card_data: Card, card_effect: CardEffect, origin: Vector2i):
+	var range : int = card_effect.target_range(card_data)
 	match card_data.target_type:
 		Card.TargetType.SELF:
-			_spawn_targeting_tile(player.current_cell, color_by_card(card_data))
+			_spawn_targeting_tile(origin, color_by_effect(card_effect))
 		Card.TargetType.POINT:
-			for cell in targetable_cells(player.current_cell, card_data.range):
-				_spawn_targeting_tile(cell, color_by_card(card_data))
+			for cell in targetable_cells(origin, range):
+				_spawn_targeting_tile(cell, color_by_effect(card_effect))
 		Card.TargetType.PROJECTILE:
-			for cell in aimable_cells(player.current_cell, card_data.range):
-				_spawn_targeting_tile(cell, color_by_card(card_data))
+			for cell in aimable_cells(origin, range):
+				_spawn_targeting_tile(cell, color_by_effect(card_effect))
 
-##terminates targeting and resolves card if conditions allow
+
+##returns the results found in targeting.
+##called by card_effect when tile is selected.
 ##target_position: Vector2
 ##card_view: Control
-func _end_targeting(target_position: Vector2, card_view: Control):
-	var card: Card = card_view.card_data
+func _resolve_targeting(target_position: Vector2, card: Card, card_effect: CardEffect, origin: Vector2i) -> TargetCast:
 	var square := get_targeted_tile(target_position)
 	
 	if square == null || card.ap_cost > player.spendable_ap:
-		_clear_targeting()
-		hand.organize_hand(hand.card_views)
-		return
+		return null
 		
-	var cast = _build_cast(card, square.target_cell)
-	if card.target_type == Card.TargetType.POINT && cast.target == null:
-		_clear_targeting()
-		hand.organize_hand(hand.card_views)
-		return
-		
-	_resolve_card(card, square.target_cell, cast.target)
-	hand.remove_card(card_view)
-	player.update_action_points(player.spendable_ap - card.ap_cost)
-	_clear_targeting()
+	var cast = _build_cast(card, square.target_cell, origin)
+	if card_effect is not ChargeEffect && cast.target == null:
+		return null
+	
+	_clear_targeting_excluding(square)
+	return cast
 
-
-func _build_cast(card: Card, aim: Vector2i) -> TargetCast:
+##creates an object that stores data of a targeted cell
+func _build_cast(card: Card, aim: Vector2i, origin: Vector2i) -> TargetCast:
 	var cast = TargetCast.new()
 	cast.cell = aim
 	if card.target_type == Card.TargetType.PROJECTILE:
-		for cell in pathfinder.cast_proj(player.current_cell, aim, card.range):
+		for cell in pathfinder.cast_proj(origin, aim, card.range):
 			var occupant = entity_on_cell(cell)
 			if occupant != null:
 				cast.target = occupant
@@ -149,6 +165,20 @@ func _build_cast(card: Card, aim: Vector2i) -> TargetCast:
 		cast.target = entity_on_cell(aim)
 	return cast
 
+##Returns a target cast of a selected cell. 
+##used by card effects to handle player input
+func build_target_cast(card:Card, card_effect: CardEffect, origin: Vector2i) -> TargetCast:
+	var cast: TargetCast = null
+	_begin_targeting(card, card_effect, origin)
+	
+	while cast == null:
+		var input = await targeting_input
+		if input is InputEventMouseButton:
+			match input.button_index:
+				MOUSE_BUTTON_LEFT: cast = _resolve_targeting(get_global_mouse_position(), card, card_effect, origin)
+				MOUSE_BUTTON_RIGHT: return cast
+	
+	return cast
 
 ##spawns the targeting tiles
 ##cell: Vector2i
@@ -164,6 +194,21 @@ func _clear_targeting() -> void:
 	for square in targeting_squares:
 		square.queue_free()
 	targeting_squares.clear()
+
+
+##erases all targeting squares with inputted exception
+##exception can be TargetingSquare or Array
+func _clear_targeting_excluding(exception):
+	if exception is Array:
+		for square in targeting_squares.duplicate():
+			if !exception.has(square):
+				square.queue_free()
+				targeting_squares.remove_at(targeting_squares.find(square))
+	elif exception is TargetingSquare:
+		for square in targeting_squares.duplicate():
+			if !square == exception:
+				square.queue_free()
+				targeting_squares.remove_at(targeting_squares.find(square))
 
 
 # -- targeting tile data references
@@ -197,6 +242,14 @@ func color_by_card(card: Card) -> Color:
 	return Color(1, 1, 1, 0.4)
 
 
+func color_by_effect(card_effect: CardEffect) -> Color:
+	if  card_effect is DamageEffect:
+		return Color(1, 0, 0, 0.4)
+	if  card_effect is BlockEffect:
+		return Color(0, 0, 1, 0.4)
+	return Color(1, 1, 1, 0.4)
+
+
 # -- enemy logic
 
 ##handles enemy turns and then passes to the player
@@ -215,16 +268,53 @@ func _on_enemy_dead(enemy: Enemy) -> void:
 		print("Victory")
 
 
+# -- player logic
+
+func start_player_turn() -> void:
+	player.is_player_turn = true
+	player.reset_block()
+	player.update_action_points(player.action_points)
+	player_turn_started.emit()
+
+
 # -- card logic
 
 ##uses the card data to handle the card being playee
 ##card: Card
 ##target_cell: Vector2i
 ##target: All // keeping it nonspecific for now
-func _resolve_card(card: Card, target_cell: Vector2i, target):
+func _resolve_card(card: Card) -> bool:
+	var targets: Array[TargetCast] = []
+	var player_ghost_position: Vector2i = player.current_cell
 	for e in card.effects:
-		e.execute(self, player, target_cell, target)
+		var cast: TargetCast = await e.target(self, card, player_ghost_position)
+		if cast == null:
+			return false
+		targets.append(cast)
+		player_ghost_position = cast.cell
+	
+	for e in card.effects:
+		var cast: TargetCast = targets[card.effects.find(e)]
+		await e.execute(self, player, cast, card)
+	return true
 
+##Hanldes the logic of a card being played, and how that card resolves
+func _card_played(mouse_pos: Vector2, card_view: CardView) -> void:
+	var card := card_view.card_data
+	if mouse_pos.y <= point_of_play && card.ap_cost <= player.spendable_ap:
+		card_view.visible = false
+		var resolved := await _resolve_card(card)
+		_clear_targeting()
+		if resolved:
+			hand.remove_card(card_view)
+			player.update_action_points(player.spendable_ap - card.ap_cost)
+		else: 
+			card_view.visible = true
+			hand.organize_hand(hand.card_views)
+			
+	else:
+		card_view.visible = true
+		hand.organize_hand(hand.card_views)
 
 # -- handle damage
 
